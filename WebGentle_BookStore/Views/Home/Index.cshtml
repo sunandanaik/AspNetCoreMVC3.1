@@ -3,49 +3,74 @@
     Layout = "_Layout";
 }
 
-<h1 class="h1">Welcome to Home Page.!</h1>
-<input type="button" value="Click Me" class="btn btn-dark" />
-<h2>@DateTime.Now.ToString("dd-MM-yy")</h2>
-<h2>Sungle line Syntax <br/>
-Sum = @(3 + 5)</h2>
-<br />
-<h1>Multiline Syntax
-    @{
-        int a = 10;
-        int b = 20;
-        int c = a + b;
-    }
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1>Welcome to Book Store</h1>
+        <p class="lead text-muted">
+            Design a responsive home page for real-time application (Book Store) | Asp.Net Core tutorial
+        </p>
+        <p>
+            <a href="#" class="btn btn-primary my-2">Search Books</a>
+        </p>
+    </div>
+</section>
 
-</h1>
-<h2>C value is = @c</h2>
-<h3>My Email is: sungitmca@gmail.com</h3>
-<h3>To Display at the rate in statement:
-Twitter Account : @@webgentle
-</h3>
+<div class="py-2 bg-light">
+    <div class="container">
+        <h3 class="h3">Top Books</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width: 18rem;">
+                    <img src="..." class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This Section will be used to display short description of book.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width: 18rem;">
+                    <img src="..." class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This Section will be used to display short description of book.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width: 18rem;">
+                    <img src="..." class="bd-placeholder-img card-img-top" alt="..." width="100%" height="225">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This Section will be used to display short description of book.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <small class="text-muted">Author Name</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<h1>Conditional Statements</h1>
-@{ 
-    int x = 10;
-}
-@if(x>5) 
-{ 
-    <h2>Hello from if block</h2>
-}
-else
-{
-    <h2>hello from else block</h2>
-}
-
-<img src="~/images/gallery-3.png" alt="mug" class="logo" />
-<br/>
-<img src="~/MyStaticFiles/images/profile.png" alt="profile" />
 
 
 
-<script src="~/lib/jquery/jquery.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // alert("Welcome to Asp.Net Core Application.");
-    });
-</script>
+
+
 
