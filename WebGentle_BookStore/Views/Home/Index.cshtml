@@ -1,63 +1,51 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/css/site.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
-</head>
-<body class="container">
-    <h1 class="h1">Welcome to Our Book Store Application..!!!</h1>
-    <input type="button" value="Click Me" class="btn btn-dark" />
-    <h2>@DateTime.Now.ToString("dd-MM-yy")</h2>
-    <h2>Sungle line Syntax <br/>
-    Sum = @(3 + 5)</h2>
-
-    <br />
-    <h1>Multiline Syntax
-        @{
-            int a = 10;
-            int b = 20;
-            int c = a + b;
-        }
-
-    </h1>
-    <h2>C value is = @c</h2>
-    <h3>My Email is: sungitmca@gmail.com</h3>
-    <h3>To Display at the rate in statement:
-    Twitter Account : @@webgentle
-    </h3>
-
-    <h1>Conditional Statements</h1>
-    @{ 
-        int x = 10;
-    }
-    @if(x>5) 
-    { 
-        <h2>Hello from if block</h2>
-    }
-    else
-    {
-        <h2>hello from else block</h2>
+<h1 class="h1">Welcome to Home Page.!</h1>
+<input type="button" value="Click Me" class="btn btn-dark" />
+<h2>@DateTime.Now.ToString("dd-MM-yy")</h2>
+<h2>Sungle line Syntax <br/>
+Sum = @(3 + 5)</h2>
+<br />
+<h1>Multiline Syntax
+    @{
+        int a = 10;
+        int b = 20;
+        int c = a + b;
     }
 
-    <img src="~/images/gallery-3.png" alt="mug" class="logo" />
-    <br/>
-    <img src="~/MyStaticFiles/images/profile.png" alt="profile" />
+</h1>
+<h2>C value is = @c</h2>
+<h3>My Email is: sungitmca@gmail.com</h3>
+<h3>To Display at the rate in statement:
+Twitter Account : @@webgentle
+</h3>
+
+<h1>Conditional Statements</h1>
+@{ 
+    int x = 10;
+}
+@if(x>5) 
+{ 
+    <h2>Hello from if block</h2>
+}
+else
+{
+    <h2>hello from else block</h2>
+}
+
+<img src="~/images/gallery-3.png" alt="mug" class="logo" />
+<br/>
+<img src="~/MyStaticFiles/images/profile.png" alt="profile" />
 
 
 
-    <script src="~/lib/jquery/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            alert("Welcome to Asp.Net Core Application.");
-        });
-    </script>
-</body>
-</html>
+<script src="~/lib/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // alert("Welcome to Asp.Net Core Application.");
+    });
+</script>
+

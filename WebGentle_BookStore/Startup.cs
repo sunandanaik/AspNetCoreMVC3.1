@@ -19,6 +19,10 @@ namespace WebGentle_BookStore
         public void ConfigureServices(IServiceCollection services) //this method is used to add all dependencies that are used in the application.
         {
             services.AddControllersWithViews();
+            //To use razor runtime conditionally to be used only in development environment.
+            #if DEBUG
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            #endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,6 +34,7 @@ namespace WebGentle_BookStore
             }
 
             app.UseStaticFiles(); //this is to inform application to use static files.
+            
             //In order to use static files from non-wwwroot folder
             app.UseStaticFiles(new StaticFileOptions()
             {
