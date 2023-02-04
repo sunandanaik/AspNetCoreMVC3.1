@@ -4,5 +4,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Welcoome to ContactUs Page</h1>
+@section breadcrumb{
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">Page 1</a></li>
+            <li class="breadcrumb-item active" aria-current="page">ContactUs</li>
+        </ol>
+    </nav>
+
+}
+
+<h1>Welcome to ContactUs Page</h1>
 

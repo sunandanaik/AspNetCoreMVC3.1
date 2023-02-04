@@ -24,7 +24,7 @@
                             <a class="btn btn-outline-primary">Login</a>
                             <a class="btn btn-primary">Register</a>
                         </li>
-                       
+
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -48,6 +48,7 @@
             </div>
         </nav>
     </header>
+    @RenderSection("breadcrumb", required: false)
     
     <main role="main">
         @RenderBody()
@@ -61,5 +62,6 @@
 
 
     <script src="~/lib/jquery/jquery.min.js"></script>
+    @RenderSection("scripts", required: false) <!--required:false indicates that this 'scripts' not required in other view files.-->
 </body>
 </html>
