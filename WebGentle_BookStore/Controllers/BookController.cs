@@ -23,7 +23,7 @@ namespace WebGentle_BookStore.Controllers
         {
             //return _bookRepository.GetAllBooks();
             var allbookData = _bookRepository.GetAllBooks();
-            return View();
+            return View(allbookData);
         }
 
         public BookModel GetBook(int id)

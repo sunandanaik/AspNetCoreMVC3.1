@@ -27,9 +27,10 @@ namespace WebGentle_BookStore.Repository
         {
             return new List<BookModel>()
             {
-                new BookModel(){Id=1,Title="MVC",Author="James Boss"},
-                new BookModel(){Id=2, Title="Java",Author="James Gosling"},
-                new BookModel(){Id=3,Title="C++",Author="Dennis Ritchie"}
+                new BookModel(){Id=1,Title="MVC",Author="James Boss", Description="This is the description for MVC book."},
+                new BookModel(){Id=2, Title="Java",Author="James Gosling", Description="This is the description for Java book."},
+                new BookModel(){Id=3,Title="C++",Author="Dennis Ritchie", Description="This is the description for Cplusplus book."},
+                new BookModel(){Id=3,Title="Azure DevOps",Author="Sunanda", Description="This is the description for Azure DevOps book."}
             };
         }
     }
