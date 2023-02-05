@@ -2,6 +2,11 @@
 @*@{
     Layout = "_Layout";
 }*@
+@{ 
+    ViewData["Title"] = "Home";
+    dynamic data = ViewBag.Data;
+    var bookInfo = ViewData["book"] as BookModel;
+}
 
 @section breadcrumb{
     <nav aria-label="breadcrumb">
@@ -16,8 +21,15 @@
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1>Welcome to Book Store</h1>
+        <h1>Welcome to Book Store @ViewData["CustomProperty"] </h1>
         <p class="lead text-muted">
+            @*@ViewBag.Data*@
+            @data.Id and @data.Name <br/>
+            Book Id = @ViewBag.Type.Id <br/>
+            Author Name = @ViewBag.Type.Author <br/>
+            @ViewData["prop1"]
+            <h2>Book Author : @bookInfo.Author</h2>
+            <h2>Book Language : @bookInfo.language</h2>
             Design a responsive home page for real-time application (Book Store) | Asp.Net Core tutorial
         </p>
         <p>

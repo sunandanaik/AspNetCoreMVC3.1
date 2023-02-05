@@ -3,13 +3,38 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Dynamic;
+using WebGentle_BookStore.Models;
 
 namespace WebGentle_BookStore.Controllers
 {
     public class HomeController : Controller
     {
+        //Using ViewData Attribute.
+        [ViewData]
+        public string CustomProperty { get; set; }
         public ViewResult Index()
         {
+            //Anonymous Type data passed in ViewBag.
+            dynamic data = new ExpandoObject();
+            data.Id = 1;
+            data.Name = "Sunanda Naik";
+            ViewBag.Data = data;
+
+            //Also can pass Model object data in ViewBag.
+            ViewBag.Type = new BookModel() { Id = 1, Author = "Dennis" };
+
+            ViewData["prop1"] = "Sunanda";
+
+            //Passing Complex data type in ViewData.
+            ViewData["book"] = new BookModel()
+            {
+                Author = "James",
+                language = "English"
+            };
+
+            CustomProperty = "Custom Value";
+
             // return "WebGentle";
             return View();
             //if you want to return different view

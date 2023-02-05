@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebGentle_BookStore.Models;
 using WebGentle_BookStore.Repository;
+using System.Dynamic;
 
 namespace WebGentle_BookStore.Controllers
 {
@@ -28,6 +29,11 @@ namespace WebGentle_BookStore.Controllers
 
         public ViewResult GetBook(int id)
         {
+            //Using Dynamic Views.
+            //dynamic oneBookData = new ExpandoObject();
+            //oneBookData.book = _bookRepository.GetBookById(id);
+            //oneBookData.Name = "Sunanda Naik";
+            //OR
             var oneBookData = _bookRepository.GetBookById(id);
             return View(oneBookData);
         }
