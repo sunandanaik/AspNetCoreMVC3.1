@@ -22,11 +22,19 @@
 <section class="jumbotron text-center">
     <div class="container">
         <h1>Welcome to Book Store @ViewData["CustomProperty"] </h1>
+
+        <environment names="Development">
+            <h3>Development</h3>
+        </environment>
+        <environment names="Production, Staging">
+            <h3>Production</h3>
+        </environment>
+
         <p class="lead text-muted">
             @*@ViewBag.Data*@
-            @data.Id and @data.Name <br/>
-            Book Id = @ViewBag.Type.Id <br/>
-            Author Name = @ViewBag.Type.Author <br/>
+            @data.Id and @data.Name <br />
+            Book Id = @ViewBag.Type.Id <br />
+            Author Name = @ViewBag.Type.Author <br />
             @ViewData["prop1"]
             <h2>Book Author : @bookInfo.Author</h2>
             <h2>Book Language : @bookInfo.language</h2>

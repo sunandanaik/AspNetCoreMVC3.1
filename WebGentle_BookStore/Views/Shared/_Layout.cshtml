@@ -12,7 +12,10 @@
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="/">
-                    <img src="~/images/book_logo.png" width="80" height="50" />
+                    @*<img src="~/images/book_logo.png" width="80" height="50" />*@
+
+                    <!--To handle caching for static files-->
+                    <img src="~/images/book_logo.png" width="80" height="50" asp-append-version="true" />
                     Book Store
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,16 +31,20 @@
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            @*<a class="nav-link text-dark" href="/">Home</a>*@
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/about">About Us</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/contact">Contact Us</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/book/getallbooks">View All Books</a>
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="getallbooks">View All Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-protocol="http" asp-host="webgentle.com" asp-controller="Book" asp-action="getallbooks">Test Link</a>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">

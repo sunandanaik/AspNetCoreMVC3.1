@@ -101,6 +101,11 @@ namespace WebGentle_BookStore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute(); 
+                //To Use Anchor tag Helper with custom name in URL.
+                //endpoints.MapControllerRoute(
+                //    name: "Default",
+                //    pattern: "bookApp/{controller=Home}/{action=Index}/{id?}"
+                //    );
             });
         }
     }

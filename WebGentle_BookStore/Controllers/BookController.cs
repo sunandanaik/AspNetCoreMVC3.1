@@ -27,7 +27,8 @@ namespace WebGentle_BookStore.Controllers
             return View(allbookData);
         }
 
-        public ViewResult GetBook(int id)
+        [Route("book-details/{id}", Name ="BookDetailsRoute")]
+        public ViewResult GetBook(int id, string nameOfBook)
         {
             //Using Dynamic Views.
             //dynamic oneBookData = new ExpandoObject();
