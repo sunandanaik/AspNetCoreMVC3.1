@@ -44,5 +44,16 @@ namespace WebGentle_BookStore.Controllers
             //return $"Book with Name = {bookName} and Author is = {authorName}";
             return _bookRepository.SearchBooks(bookName, authorName);
         }
+
+        public ViewResult AddNewBook()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ViewResult AddNewBook(BookModel bookModel)
+        {
+            return View();
+        }
     }
 }
