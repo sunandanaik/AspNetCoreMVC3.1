@@ -1,12 +1,21 @@
 ﻿@model BookModel
 @{
-    ViewData["Title"] = "Add New Book";
-    //Layout = "~/Views/Shared/_Layout.cshtml"; //Its already specified in ViewStart.cshtml file.
+    ViewData["Title"] = "Add Book";
+            //Layout = "~/Views/Shared/_Layout.cshtml"; //Its already specified in ViewStart.cshtml file.
 }
 
 
 <div class="container">
     <h3 class="display-4">Add New Book</h3>
+    @if (ViewBag.IsSuccess)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations!</strong> You added new book Successfully.<br />
+            Click <a asp-controller="book" asp-action="getbook" asp-route-id="@ViewBag.BookId">here</a> to View the details.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <!--If you have different Action name and controller then you can specify this-->
     <form method="post" asp-action="AddNewBook" asp-controller="Book">
         <div class="form-group">

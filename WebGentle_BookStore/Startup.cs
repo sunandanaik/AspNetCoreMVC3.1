@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebGentle_BookStore.Data;
+using WebGentle_BookStore.Repository;
 
 namespace WebGentle_BookStore
 {
@@ -20,12 +21,13 @@ namespace WebGentle_BookStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) //this method is used to add all dependencies that are used in the application.
         {
-            services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=.;Database=BookStore;Integrated Security=True;"));
+            services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=RSSPL82L\\SQLEXPRESS;Database=BookStore;Integrated Security=True;"));
             services.AddControllersWithViews();
             //To use razor runtime conditionally to be used only in development environment.
             #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            #endif
+#endif
+            services.AddScoped<BookRepository, BookRepository>(); //Adding dependency injection here.
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
