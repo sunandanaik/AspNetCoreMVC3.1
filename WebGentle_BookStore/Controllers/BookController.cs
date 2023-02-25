@@ -21,22 +21,22 @@ namespace WebGentle_BookStore.Controllers
             //_bookRepository = new BookRepository();
             _bookRepository = bookRepository;
         }
-        public ViewResult GetAllBooks()
+        public async Task<ViewResult> GetAllBooks()
         {
             //return _bookRepository.GetAllBooks();
-            var allbookData = _bookRepository.GetAllBooks();
+            var allbookData =await  _bookRepository.GetAllBooks();
             return View(allbookData);
         }
 
         [Route("book-details/{id}", Name ="BookDetailsRoute")]
-        public ViewResult GetBook(int id, string nameOfBook)
+        public async Task<ViewResult> GetBook(int id, string nameOfBook)
         {
             //Using Dynamic Views.
             //dynamic oneBookData = new ExpandoObject();
             //oneBookData.book = _bookRepository.GetBookById(id);
             //oneBookData.Name = "Sunanda Naik";
             //OR
-            var oneBookData = _bookRepository.GetBookById(id);
+            var oneBookData = await _bookRepository.GetBookById(id);
             return View(oneBookData);
         }
 
@@ -54,15 +54,25 @@ namespace WebGentle_BookStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewBook(BookModel bookModel)
+        public async Task<IActionResult> AddNewBook(BookModel bookModel)
         {
-            int bookId = _bookRepository.AddNewBook(bookModel);
-            if(bookId > 0)
+            //To check if model properties are vaildated or not.
+            if (ModelState.IsValid)
             {
-                //return RedirectToAction(nameof(AddNewBook)); //it returns string
-                //OR
-                return RedirectToAction("AddNewBook",new { isSuccess = true, bookId = bookId });
+                int bookId = await _bookRepository.AddNewBook(bookModel);
+                if (bookId > 0)
+                {
+                    //return RedirectToAction(nameof(AddNewBook)); //it returns string
+                    //OR
+                    return RedirectToAction("AddNewBook", new { isSuccess = true, bookId = bookId });
+                }
             }
+            ViewBag.IsSuccess = false;
+            ViewBag.BookId = 0;
+
+            //If you want to add custom error message to Modelstate
+            ModelState.AddModelError("", "This is my custom error message.");
+
             return View();
         }
     }

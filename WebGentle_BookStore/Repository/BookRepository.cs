@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace WebGentle_BookStore.Repository
             _context = context;
         }
 
-        public int AddNewBook(BookModel model)
+        public async Task<int> AddNewBook(BookModel model)
         {
             //Now create instance of Books entity class here and map all the properties of model book class to entity book class.
             var newBook = new Books()
@@ -28,25 +29,68 @@ namespace WebGentle_BookStore.Repository
                 Description = model.Description,
                 Category = model.Category,
                 language = model.language,
-                TotalPages = model.TotalPages,
+                TotalPages = model.TotalPages.HasValue ? model.TotalPages : 0,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
             };
-            //Now to map entity class to context class.
-            _context.Books.Add(newBook);
-            _context.SaveChanges(); //then only application will hit db.
-            //Once saved the Id will be automatically be associated with this newBook object.
+            //Now to map entity class instance to context class.
+            //_context.Books.Add(newBook);
+            //_context.SaveChanges(); //then only application will hit db.
 
+            //OR To make async call using EF Core.
+            await _context.Books.AddAsync(newBook);
+            await _context.SaveChangesAsync();
+            
+            //Once saved the Id will be automatically be associated with this newBook object.
             return newBook.Id;
         }
-        public List<BookModel> GetAllBooks()
+        public async Task<List<BookModel>> GetAllBooks()
         {
-            return DataSource();
+            var books = new List<BookModel>();
+            var booksData = await _context.Books.ToListAsync();
+            //Now to convert Books to List of BookModel
+            if(booksData.Any() == true)
+            {
+                foreach(var item in booksData)
+                {
+                    books.Add(new BookModel()
+                    {
+                        Title = item.Title,
+                        Author = item.Author,
+                        Description = item.Description,
+                        Category = item.Category,
+                        language = item.language,
+                        TotalPages = item.TotalPages,
+                        Id = item.Id
+
+                    });
+                }
+            }
+            return books;
+            //return DataSource();
         }
 
-        public BookModel GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            return DataSource().Where(x => x.Id == id).FirstOrDefault();
+            var bookData = await _context.Books.FindAsync(id);
+            if(bookData != null)
+            {
+                var bookModel = new BookModel()
+                {
+                    Title = bookData.Title,
+                    Author = bookData.Author,
+                    Description = bookData.Description,
+                    Category = bookData.Category,
+                    language = bookData.language,
+                    TotalPages = bookData.TotalPages,
+                    Id =bookData.Id
+                };
+                return bookModel;
+            }
+            return null;
+            //OR
+            //_context.Books.Where(x => x.Id == id).FirstOrDefaultAsync();
+            //return DataSource().Where(x => x.Id == id).FirstOrDefault();
         }
 
         public List<BookModel> SearchBooks(string bookName, string authorName)
