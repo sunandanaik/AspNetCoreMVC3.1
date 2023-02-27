@@ -30,7 +30,7 @@ namespace WebGentle_BookStore.Controllers
             ViewData["book"] = new BookModel()
             {
                 Author = "James",
-                language = "English"
+                Language = "English"
             };
 
             CustomProperty = "Custom Value";

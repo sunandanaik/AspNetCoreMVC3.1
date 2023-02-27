@@ -28,7 +28,7 @@ namespace WebGentle_BookStore.Repository
                 Author = model.Author,
                 Description = model.Description,
                 Category = model.Category,
-                language = model.language,
+                LanguageId = model.LanguageId,
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages : 0,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow
@@ -59,7 +59,8 @@ namespace WebGentle_BookStore.Repository
                         Author = item.Author,
                         Description = item.Description,
                         Category = item.Category,
-                        language = item.language,
+                        LanguageId = item.LanguageId,
+                        Language = item.Language.Name,
                         TotalPages = item.TotalPages,
                         Id = item.Id
 
@@ -72,41 +73,56 @@ namespace WebGentle_BookStore.Repository
 
         public async Task<BookModel> GetBookById(int id)
         {
-            var bookData = await _context.Books.FindAsync(id);
-            if(bookData != null)
+            var bookData = await _context.Books.Where(x => x.Id == id).Select(book => new BookModel()
             {
-                var bookModel = new BookModel()
-                {
-                    Title = bookData.Title,
-                    Author = bookData.Author,
-                    Description = bookData.Description,
-                    Category = bookData.Category,
-                    language = bookData.language,
-                    TotalPages = bookData.TotalPages,
-                    Id =bookData.Id
-                };
-                return bookModel;
-            }
-            return null;
+                Title = book.Title,
+                Author = book.Author,
+                Description = book.Description,
+                Category = book.Category,
+                LanguageId = book.LanguageId,
+                Language = book.Language.Name,
+                TotalPages = book.TotalPages,
+                Id = book.Id
+            }).FirstOrDefaultAsync();
+
+            return bookData;
+            //OR
+            //var bookData = await _context.Books.FindAsync(id);
+            //if (bookData != null)
+            //{
+            //    var bookModel = new BookModel()
+            //    {
+            //        Title = bookData.Title,
+            //        Author = bookData.Author,
+            //        Description = bookData.Description,
+            //        Category = bookData.Category,
+            //        LanguageId = bookData.LanguageId,
+            //        Language = bookData.Language.Name,
+            //        TotalPages = bookData.TotalPages,
+            //        Id =bookData.Id
+            //    };
+            //    return bookModel;
+            //}
+            //return null;
             //OR
             //_context.Books.Where(x => x.Id == id).FirstOrDefaultAsync();
             //return DataSource().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public List<BookModel> SearchBooks(string bookName, string authorName)
-        {
-            return DataSource().Where(x => x.Title.Contains(bookName) || x.Author.Contains(authorName)).ToList();
-        }
+        //public List<BookModel> SearchBooks(string bookName, string authorName)
+        //{
+        //    return DataSource().Where(x => x.Title.Contains(bookName) || x.Author.Contains(authorName)).ToList();
+        //}
 
-        private List<BookModel> DataSource()
-        {
-            return new List<BookModel>()
-            {
-                new BookModel(){Id=1,Title="MVC",Author="James Boss", Description="This is the description for MVC book.", Category="Programming", language="English",TotalPages=134},
-                new BookModel(){Id=2, Title="Java",Author="James Gosling", Description="This is the description for Java book.", Category="Concept", language="French",TotalPages=205},
-                new BookModel(){Id=3,Title="C++",Author="Dennis Ritchie", Description="This is the description for Cplusplus book.", Category="Developer", language="Hindi",TotalPages=564},
-                new BookModel(){Id=3,Title="Azure DevOps",Author="Sunanda", Description="This is the description for Azure DevOps book.", Category="DevOps",language="English", TotalPages=800}
-            };
-        }
+        //private List<BookModel> DataSource()
+        //{
+        //    return new List<BookModel>()
+        //    {
+        //        new BookModel(){Id=1,Title="MVC",Author="James Boss", Description="This is the description for MVC book.", Category="Programming", language="English",TotalPages=134},
+        //        new BookModel(){Id=2, Title="Java",Author="James Gosling", Description="This is the description for Java book.", Category="Concept", language="French",TotalPages=205},
+        //        new BookModel(){Id=3,Title="C++",Author="Dennis Ritchie", Description="This is the description for Cplusplus book.", Category="Developer", language="Hindi",TotalPages=564},
+        //        new BookModel(){Id=3,Title="Azure DevOps",Author="Sunanda", Description="This is the description for Azure DevOps book.", Category="DevOps",language="English", TotalPages=800}
+        //    };
+        //}
     }
 }

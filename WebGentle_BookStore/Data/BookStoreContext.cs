@@ -13,6 +13,7 @@ namespace WebGentle_BookStore.Data
 
         }
         public DbSet<Books> Books { get; set; }
+        public DbSet<Language> Language {get; set;}
 
         //To give ConnectionString here.
         //If you specifying this connection string in Startup.cs file then no need to specify here.

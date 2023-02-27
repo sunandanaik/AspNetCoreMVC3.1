@@ -28,6 +28,7 @@ namespace WebGentle_BookStore
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
             services.AddScoped<BookRepository, BookRepository>(); //Adding dependency injection here.
+            services.AddScoped<LanguageRepository, LanguageRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
