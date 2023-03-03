@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using WebGentle_BookStore.Enums;
+using WebGentle_BookStore.Helpers;
 
 namespace WebGentle_BookStore.Models
 {
@@ -16,8 +17,13 @@ namespace WebGentle_BookStore.Models
 
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="Please enter Book Title")]
-        [StringLength(100, MinimumLength =5)]
+        //[Required(ErrorMessage ="Please enter Book Title")]
+        //[StringLength(100, MinimumLength =5)]
+        //To add custom error msg use ErrorMessage property here.
+        //[MyCustomValidation(ErrorMessage ="This is custom error message for custom validation.")]
+        //[MyCustomValidation(Text ="Azure")]
+        //OR if you donot want to pass text property here then make use of constructor in MyCustomValidationAttribute class.
+        [MyCustomValidation("Azure")]
         public string Title { get; set; }
 
         [Required]
