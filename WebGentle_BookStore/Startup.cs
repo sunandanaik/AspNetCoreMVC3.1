@@ -24,8 +24,13 @@ namespace WebGentle_BookStore
             services.AddDbContext<BookStoreContext>(options => options.UseSqlServer("Server=RSSPL82L\\SQLEXPRESS;Database=BookStore;Integrated Security=True;"));
             services.AddControllersWithViews();
             //To use razor runtime conditionally to be used only in development environment.
-            #if DEBUG
+#if DEBUG
+            
             services.AddRazorPages().AddRazorRuntimeCompilation();
+            //UnComment to disable client-side validation.
+            //.AddViewOptions(option => {
+            //    option.HtmlHelperOptions.ClientValidationEnabled = false;
+            //});
 #endif
             services.AddScoped<BookRepository, BookRepository>(); //Adding dependency injection here.
             services.AddScoped<LanguageRepository, LanguageRepository>();
