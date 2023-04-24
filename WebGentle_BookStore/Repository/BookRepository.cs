@@ -31,8 +31,24 @@ namespace WebGentle_BookStore.Repository
                 LanguageId = model.LanguageId,
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages : 0,
                 CreatedOn = DateTime.UtcNow,
-                UpdatedOn = DateTime.UtcNow
+                UpdatedOn = DateTime.UtcNow,
+                CoverImageUrl = model.CoverImageUrl //we need to get path in folder variable.1. to pass as parameter & 2. to add property in bookmodel and use.
             };
+
+            //Make a list
+            var galleryLst = new List<BookGallery>();
+            newBook.bookGallery = new List<BookGallery>();
+
+            foreach (var file in model.Gallery)
+            {
+                newBook.bookGallery.Add (new BookGallery()
+                {
+                    Name = file.Name,
+                    URL = file.URL
+                });
+                
+            }
+           
             //Now to map entity class instance to context class.
             //_context.Books.Add(newBook);
             //_context.SaveChanges(); //then only application will hit db.
@@ -46,28 +62,47 @@ namespace WebGentle_BookStore.Repository
         }
         public async Task<List<BookModel>> GetAllBooks()
         {
-            var books = new List<BookModel>();
-            var booksData = await _context.Books.ToListAsync();
-            //Now to convert Books to List of BookModel
-            if(booksData.Any() == true)
-            {
-                foreach(var item in booksData)
-                {
-                    books.Add(new BookModel()
-                    {
-                        Title = item.Title,
-                        Author = item.Author,
-                        Description = item.Description,
-                        Category = item.Category,
-                        LanguageId = item.LanguageId,
-                        Language = item.Language.Name,
-                        TotalPages = item.TotalPages,
-                        Id = item.Id
+            //var books = new List<BookModel>();
+            //var booksData = await _context.Books.ToListAsync();
+            ////Now to convert Books to List of BookModel.
+            //if(booksData.Any() == true)
+            //{
+            //    foreach(var item in booksData)
+            //    {
+            //        books.Add(new BookModel()
+            //        {
+            //            Title = item.Title,
+            //            Author = item.Author,
+            //            Description = item.Description,
+            //            Category = item.Category,
+            //            LanguageId = item.LanguageId,
+            //            Language = item.Language.Name,
+            //            TotalPages = item.TotalPages,
+            //            Id = item.Id,
+            //            CoverImageUrl = item.CoverImageUrl
 
-                    });
-                }
-            }
-            return books;
+            //        });
+            //    }
+            //}
+            //return books;
+
+            //OR-----
+            var booksData = await _context.Books.Select(book => new BookModel()
+            {
+                Title = book.Title,
+                Author = book.Author,
+                Description = book.Description,
+                Category = book.Category,
+                LanguageId = book.LanguageId,
+                Language = book.Language.Name,
+                TotalPages = book.TotalPages,
+                Id = book.Id,
+                CoverImageUrl = book.CoverImageUrl
+            }).ToListAsync();
+
+            return booksData;
+
+            //OR---
             //return DataSource();
         }
 
@@ -82,7 +117,14 @@ namespace WebGentle_BookStore.Repository
                 LanguageId = book.LanguageId,
                 Language = book.Language.Name,
                 TotalPages = book.TotalPages,
-                Id = book.Id
+                Id = book.Id,
+                CoverImageUrl = book.CoverImageUrl,
+                Gallery = book.bookGallery.Select(g => new GalleryModel()
+                {
+                    Id = g.Id,
+                    Name = g.Name,
+                    URL = g.URL
+                }).ToList()
             }).FirstOrDefaultAsync();
 
             return bookData;

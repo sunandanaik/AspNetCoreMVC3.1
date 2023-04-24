@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using WebGentle_BookStore.Enums;
 using WebGentle_BookStore.Helpers;
+using Microsoft.AspNetCore.Http;
 
 namespace WebGentle_BookStore.Models
 {
@@ -23,7 +24,7 @@ namespace WebGentle_BookStore.Models
         //[MyCustomValidation(ErrorMessage ="This is custom error message for custom validation.")]
         //[MyCustomValidation(Text ="Azure")]
         //OR if you donot want to pass text property here then make use of constructor in MyCustomValidationAttribute class.
-        [MyCustomValidation("Azure")]
+        //[MyCustomValidation("Azure")]
         public string Title { get; set; }
 
         [Required]
@@ -49,5 +50,15 @@ namespace WebGentle_BookStore.Models
         [Required]
         [Display(Name ="Total Pages of Book")]
         public int? TotalPages { get; set; }
+        
+        [Display(Name ="Choose the Cover Photo of your book")]
+        [Required]
+        public IFormFile CoverPhoto { get; set; }
+        public string CoverImageUrl { get; set; }
+
+        [Display(Name = "Choose the Gallery Images of your book")]
+        [Required]
+        public IFormFileCollection GalleryImages { get; set; }
+        public List<GalleryModel> Gallery { get; set; }
     }
 }

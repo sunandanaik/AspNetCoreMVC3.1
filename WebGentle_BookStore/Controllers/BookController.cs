@@ -7,6 +7,9 @@ using WebGentle_BookStore.Models;
 using WebGentle_BookStore.Repository;
 using System.Dynamic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace WebGentle_BookStore.Controllers
 {
@@ -18,13 +21,15 @@ namespace WebGentle_BookStore.Controllers
         //}
         private readonly BookRepository _bookRepository = null;
         private readonly LanguageRepository _languageRepository = null;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        //We need to add repository dependency into this constructor.
-        public BookController(BookRepository bookRepository,LanguageRepository languageRepository)
+        //We need to add repository dependency into this constructor since Asp.net core by default supports dependency injection.
+        public BookController(BookRepository bookRepository,LanguageRepository languageRepository, IWebHostEnvironment env)
         {
             //_bookRepository = new BookRepository();
             _bookRepository = bookRepository;
             _languageRepository = languageRepository;
+            _webHostEnvironment = env;
         }
         public async Task<ViewResult> GetAllBooks()
         {
@@ -101,6 +106,29 @@ namespace WebGentle_BookStore.Controllers
             //To check if model properties are vaildated or not.
             if (ModelState.IsValid)
             {
+                if(bookModel.CoverPhoto != null)
+                {
+                    string folder = "books/cover/";
+                    bookModel.CoverImageUrl = await UploadImage(folder,bookModel.CoverPhoto);
+                }
+                if (bookModel.GalleryImages != null)
+                {
+                    string folder = "books/gallery/";
+
+                    //Now to add 2 properties: url & name to store into Db.
+                    bookModel.Gallery = new List<GalleryModel>(); //Here make object of list of GalleryModel.
+
+                    foreach(var file in bookModel.GalleryImages)
+                    {
+                        var gallery = new GalleryModel()
+                        {
+                            Name = file.FileName,
+                            URL = await UploadImage(folder, file) //Now to save url into DB we need to store in another class GalleryModel.cs
+                        };
+                        bookModel.Gallery.Add(gallery); //Add each gallery imgs into List of GalleryModel imgs.
+                    }
+                   
+                }
                 int bookId = await _bookRepository.AddNewBook(bookModel);
                 if (bookId > 0)
                 {
@@ -125,6 +153,20 @@ namespace WebGentle_BookStore.Controllers
             ModelState.AddModelError("", "This is my custom error message.");
 
             return View();
+        }
+
+        //Now to make this method common, will have to pass folder name dynamically in parameter.
+        private async Task<string> UploadImage(string folderPath,IFormFile file)
+        {
+            //To append image name to the folder and also you may upload multiple images with same name
+            //so we use unique key as guid.
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+            //bookModel.CoverImageUrl = "/" + folder; //Here binding image url to model property.
+            //In order to combine both the paths, use Path of System.IO class.
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+            //Now to save image to folder
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+            return "/" + folderPath;
         }
 
         //private List<LanguageModel> GetLanguage()
