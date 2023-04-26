@@ -60,5 +60,10 @@ namespace WebGentle_BookStore.Models
         [Required]
         public IFormFileCollection GalleryImages { get; set; }
         public List<GalleryModel> Gallery { get; set; }
+
+        [Display(Name = "Upload your book in pdf format")]
+        [Required]
+        public IFormFile BookPdf { get; set; }
+        public string BookPdfUrl { get; set; }
     }
 }

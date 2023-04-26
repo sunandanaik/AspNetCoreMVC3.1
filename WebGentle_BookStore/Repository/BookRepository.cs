@@ -32,7 +32,8 @@ namespace WebGentle_BookStore.Repository
                 TotalPages = model.TotalPages.HasValue ? model.TotalPages : 0,
                 CreatedOn = DateTime.UtcNow,
                 UpdatedOn = DateTime.UtcNow,
-                CoverImageUrl = model.CoverImageUrl //we need to get path in folder variable.1. to pass as parameter & 2. to add property in bookmodel and use.
+                CoverImageUrl = model.CoverImageUrl, //we need to get path in folder variable.1. by passing as parameter & 2. by adding property in bookmodel and use.
+                BookPdfUrl = model.BookPdfUrl
             };
 
             //Make a list
@@ -124,7 +125,8 @@ namespace WebGentle_BookStore.Repository
                     Id = g.Id,
                     Name = g.Name,
                     URL = g.URL
-                }).ToList()
+                }).ToList(),
+                BookPdfUrl = book.BookPdfUrl
             }).FirstOrDefaultAsync();
 
             return bookData;

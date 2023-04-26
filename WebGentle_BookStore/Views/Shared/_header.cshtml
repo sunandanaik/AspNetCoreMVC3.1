@@ -1,0 +1,50 @@
+﻿<header>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                @*<img src="~/images/book_logo.png" width="80" height="50" />*@
+
+                <!--To handle caching for static files-->
+                <img src="~/images/book_logo.png" width="80" height="50" asp-append-version="true" />
+                Book Store
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary">Login</a>
+                        <a class="btn btn-primary">Register</a>
+                    </li>
+
+                </ul>
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                        @*<a class="nav-link text-dark" href="/">Home</a>*@
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="About">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Home" asp-action="Contact">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Book" asp-action="getallbooks">View All Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-controller="Book" asp-action="AddNewBook">Add New Book</a>
+                    </li>
+                    @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-protocol="http" asp-host="webgentle.com" asp-controller="Book" asp-action="getallbooks">Test Link</a>
+                        </li>*@
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>

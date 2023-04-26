@@ -108,6 +108,15 @@
         <span asp-validation-for="GalleryImages" class="text-danger"></span>
     </div>
 
+    <div class="form-group">
+        <label asp-for="BookPdf"></label>
+        <div class="custom-file">
+            <input asp-for="BookPdf" class="custom-file-input" id="customfile" />
+            <label class="custom-file-label" for="customfile">Choose file</label>
+        </div>
+        <span asp-validation-for="BookPdf" class="text-danger"></span>
+    </div>
+
     <div class="form-group" style="margin-top: 15px;">
         <input type="submit" value="Add Book" class="btn btn-primary" />
     </div>
